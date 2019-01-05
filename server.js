@@ -7,7 +7,6 @@ app.get('/', function (req, res) {
    res.sendFile( __dirname + "/" + "index.html" );
 })
 
-var nextNum = 1;
 app.get('/nextFactorial', function (req, res) {
    // Prepare output in JSON format
    nextNum=factorialSeq();
