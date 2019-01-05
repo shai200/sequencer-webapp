@@ -27,6 +27,36 @@ app.get('/nextFibonacci', function (req, res) {
    res.end(JSON.stringify(response));
 })
 
+app.get('/nextRange', function (req, res) {
+   // Prepare output in JSON format
+   nextRange=rangeSeq(1,2);
+   response = {
+      next:nextRange
+   };
+   console.log(response);
+   res.end(JSON.stringify(response));
+})
+
+app.get('/nextPrime', function (req, res) {
+   // Prepare output in JSON format
+   nextPrime=primeSeq();
+   response = {
+      next:nextPrime
+   };
+   console.log(response);
+   res.end(JSON.stringify(response));
+})
+
+app.get('/nextPrimalSum', function (req, res) {
+   // Prepare output in JSON format
+   nextPrimalSum=partialSumSeq();
+   response = {
+      next:nextPrimalSum
+   };
+   console.log(response);
+   res.end(JSON.stringify(response));
+})
+
 
 var server = app.listen(8081, function () {
    var host = server.address().address
@@ -38,7 +68,7 @@ var server = app.listen(8081, function () {
 
 // SEQUENCERS - TODO EXTERNALIZE
 
-var currentFactorialPosition=1;
+
 var factorialArray = [1,1,2,6,24,120,720,5040,40320,
 362880,
 3628800,
@@ -53,7 +83,7 @@ var factorialArray = [1,1,2,6,24,120,720,5040,40320,
 121645100408832000,
 2432902008176640000
 ];
-
+currentFactorialPosition=0;
 function factorialSeq () {
 	// MOCK
 	var currentNum = factorialArray[currentFactorialPosition];
@@ -63,7 +93,7 @@ function factorialSeq () {
 } // 1, 1, 2, 6, 24, ...
 
 
-var currentFibPosition=1;
+
 var fibArray = [
 1,
 1,
@@ -116,7 +146,7 @@ var fibArray = [
 7778742049,
 12586269025
 ];
-
+currentFibPosition=0;
 function fibonacciSeq () {
 	// MOCK
 	var currentNum = fibArray[currentFibPosition];
@@ -125,9 +155,48 @@ function fibonacciSeq () {
 	
 } // 1, 1, 2, 6, 24, ...
 
+var rangeArray = [
+1,3,5,7
+];
+currentRangePosition=0;
+function rangeSeq (start, stop) {
+	// MOCK
+	var currentNum = rangeArray[currentRangePosition];
+	currentRangePosition++;
+	return currentNum;
+	
+} // rangeSeq(1, 2) -> 1, 3, 5, 7, ...
+
+
+var primeArray = [
+2,3,5,7,11,13
+];
+currentPrimePosition=0;
+
+function primeSeq () {
+	// MOCK
+	var currentNum = rangeArray[currentPrimePosition];
+	currentPrimePosition++;
+	return currentNum;
+	
+}
+
+var primalSumArray = [
+1,4,11,13,13
+];
+currentPrimalSumPosition=0;
+
+function partialSumSeq () {
+	// MOCK
+	var currentNum = rangeArray[currentPrimalSumPosition];
+	currentPrimalSumPosition++;
+	return currentNum;
+	
+}
+
 
 /*
-function fibonacciSeq () {...} // 1,	1, 2, 3, 5, 8, 13, ... 
+
 function rangeSeq (start, step) {...} // rangeSeq(1, 2) -> 1, 3, 5, 7, ...
 function primeSeq () {...} // 2,	3, 5, 7, 11, 13, ...
 function partialSumSeq (1, 3, 7, 2, 0) {...} // 1, 4, 11, 13, 13, end
