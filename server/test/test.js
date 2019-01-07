@@ -1,13 +1,9 @@
 var expect  = require('chai').expect;
 var assert = require('chai').assert;
 const sequencers = require("../sequencers");
-
+const generator = require("../generator");
 var request = require('request');
-var numbers = [1, 2, 3, 4, 5];
 
-assert.isArray(numbers, 'is array of numbers');
-assert.include(numbers, 2, 'array contains 2');
-assert.lengthOf(numbers, 5, 'array contains 5 numbers');
 
 describe("test sequencers", () =>{
   it("test factorial sequence", (done) =>{
@@ -65,6 +61,44 @@ describe("test sequencers", () =>{
         expect(partial()).to.eql(13);
         expect(partial()).to.eql(undefined);
         expect(partial()).to.eql(undefined);
+        done();
+    });
+
+});
+
+describe("test generator", () =>{
+    it("test factorial generator", (done) =>{
+        let gen = generator(sequencers.factorialSeq);
+        expect(gen.next()).to.eql(1);
+        expect(gen.next()).to.eql(1);
+        expect(gen.next()).to.eql(2);
+        expect(gen.next()).to.eql(6);
+        expect(gen.next()).to.eql(24);
+        done();
+    });
+
+    it("test fibonacci generator", (done) =>{
+        let gen = generator(sequencers.fibonacciSeq);
+        expect(gen.next()).to.eql(1);
+        expect(gen.next()).to.eql(1);
+        expect(gen.next()).to.eql(2);
+        expect(gen.next()).to.eql(3);
+        expect(gen.next()).to.eql(5);
+        expect(gen.next()).to.eql(8);
+        expect(gen.next()).to.eql(13);
+        done();
+    });
+
+
+    it("test prime generator", (done) =>{
+        let gen = generator(sequencers.primeSeq);
+        expect(gen.next()).to.eql(2);
+        expect(gen.next()).to.eql(3);
+        expect(gen.next()).to.eql(5);
+        expect(gen.next()).to.eql(7);
+        expect(gen.next()).to.eql(11);
+        expect(gen.next()).to.eql(13);
+        expect(gen.next()).to.eql(17);
         done();
     });
 
