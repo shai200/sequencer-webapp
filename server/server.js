@@ -81,7 +81,7 @@ let seq = generator(pipedSeq);
 app.get('/nextPipedSeq', function (req, res) {
     // Prepare output in JSON format
     nextPipedSeq=seq.next();
-    if(nextPipedSeq==null) nextPipedSeq="";
+    if(nextPipedSeq==null) nextPipedSeq="error";
     response = {
         next:nextPipedSeq
     };
