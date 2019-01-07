@@ -67,6 +67,7 @@ let partial = sequencers.partialSumSeq(1, 3, 7, 2, 0); //partialSumSeq (1, 3, 7,
 app.get('/nextPartialSum', function (req, res) {
    // Prepare output in JSON format
    nextPartialSum=partial();
+   if(nextPartialSum==null) nextPartialSum="error";
    response = {
       next:nextPartialSum
    };
@@ -80,6 +81,7 @@ let seq = generator(pipedSeq);
 app.get('/nextPipedSeq', function (req, res) {
     // Prepare output in JSON format
     nextPipedSeq=seq.next();
+    if(nextPipedSeq==null) nextPipedSeq="";
     response = {
         next:nextPipedSeq
     };
