@@ -93,6 +93,29 @@ app.get('/initRange', function (req, res) {
 })
 
 
+app.get('/initPartialSum', function (req, res) {
+    // initialize each sequencer which has args with new args
+    try{
+
+        var args_int = req.query.args.split(',').map(function(item) {
+            return parseInt(item, 10);
+        });
+        partial = sequencers.partialSumSeq.apply(this,args_int); // rangeSeq(1, 2) -> 1, 3, 5, 7, ...
+        response = {
+            args:req.query.args, success:true
+        };
+
+    }catch(err){
+        response = {
+            error:err.message, success:false
+        };
+    }
+
+    console.log(response);
+    res.end(JSON.stringify(response));
+})
+
+
 
 var server = app.listen(8081, function () {
    var host = server.address().address

@@ -102,5 +102,29 @@ describe("test generator", () =>{
         done();
     });
 
+    it("test range generator", (done) =>{
+        let gen = generator(sequencers.rangeSeq, 2, 3);
+        expect(gen.next()).to.eql(2);
+        expect(gen.next()).to.eql(5);
+        expect(gen.next()).to.eql(8);
+        expect(gen.next()).to.eql(11);
+        expect(gen.next()).to.eql(14);
+        done();
+
+    });
+
+    it("test partial sum sequence generator", (done) =>{
+        let gen = generator(sequencers.partialSumSeq, 1, 3, 7, 2, 0); //partialSumSeq (1, 3, 7, 2, 0) {...} // 1, 4, 11, 13, 13, end
+        expect(gen.next()).to.eql(1);
+        expect(gen.next()).to.eql(4);
+        expect(gen.next()).to.eql(11);
+        expect(gen.next()).to.eql(13);
+        expect(gen.next()).to.eql(13);
+        expect(gen.next()).to.eql(undefined);
+        expect(gen.next()).to.eql(undefined);
+        done();
+
+    });
+
 });
 
