@@ -1,6 +1,13 @@
-Dev Notes
+Included:
 
-ARCHITECTURE
-In the interest of time, we're going to KISS (Keep It Simple, Sister).
-So, I'm going to use a boilerplate vuejs-node-express stack for a full backend and frontend mvc framework.
+- Sequences
+- Generators
+- Piped Sequences
+- Unit Tests
+- Frontend Stub
+
+Excluded:
+
+- Frontend
+
 
