@@ -1,4 +1,4 @@
-module.exports = function factorialSeq () {
+module.exports = () => {
     let currentNum=0, sum = 0;
     return () => {
         if (currentNum === 0){

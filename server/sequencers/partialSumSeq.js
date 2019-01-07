@@ -1,4 +1,4 @@
-module.exports = function partialSumSeq ()  {
+module.exports =  (...arguments) => {
     let currentIndex=0,sum=0;
     let input = arguments;
 
@@ -14,7 +14,7 @@ module.exports = function partialSumSeq ()  {
     }
     return () => {
         if(currentIndex>=input.length){
-            return;
+            return null;
         }
         sum = sumTillMaxIndex(input,currentIndex);
         currentIndex += 1;

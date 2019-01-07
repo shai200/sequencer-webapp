@@ -1,4 +1,4 @@
-module.exports = function rangeSeq (start, step) {
+module.exports = (start, step) => {
     let currentNum=0;
     return () => {
         if (currentNum === 0){

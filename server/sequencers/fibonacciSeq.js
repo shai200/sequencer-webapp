@@ -1,4 +1,4 @@
-module.exports = function fibonacciSeq() {
+module.exports = () => {
 
     function fibonacci(num){
         var a = 1, b = 0, temp;

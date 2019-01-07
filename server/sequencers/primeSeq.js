@@ -1,4 +1,4 @@
-module.exports = function primeSeq() {
+module.exports = () => {
 
     function isPrime(num) {
         if ( num === 0 || num === 1 ) {

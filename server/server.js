@@ -1,6 +1,10 @@
 var express = require('express');
 const sequencers = require("./sequencers");
+const generator = require("./generator");
+const piped = require("./pipe");
 var app = express();
+
+
 
 
 app.use(express.static('public'));
@@ -9,6 +13,7 @@ app.get('/', function (req, res) {
 })
 
 let fact = sequencers.factorialSeq();
+
 app.get('/nextFactorial', function (req, res) {
 
    // Prepare output in JSON format
@@ -61,7 +66,7 @@ let partial = sequencers.partialSumSeq(1, 3, 7, 2, 0); //partialSumSeq (1, 3, 7,
 // TODO customize partial sum params based on user input
 app.get('/nextPartialSum', function (req, res) {
    // Prepare output in JSON format
-    nextPartialSum=partial();
+   nextPartialSum=partial();
    response = {
       next:nextPartialSum
    };
@@ -69,6 +74,30 @@ app.get('/nextPartialSum', function (req, res) {
    res.end(JSON.stringify(response));
 })
 
+let pipedSeq = piped.pipeSeq(sequencers.rangeSeq, 2,3).pipeline(piped.accumulator).invoke();
+let seq = generator(pipedSeq);
+
+app.get('/nextPipedSeq', function (req, res) {
+    // Prepare output in JSON format
+    nextPipedSeq=seq.next();
+    response = {
+        next:nextPipedSeq
+    };
+    console.log(response);
+    res.end(JSON.stringify(response));
+})
+
+
+let pipedSeqEven = piped.pipeSeq(sequencers.rangeSeq, 2,3)
+    .pipeline(piped.even).invoke();
+let genEven = generator(pipedSeqEven);
+
+app.get('/isEvenNextPipedRangeSeq', function (req, res) {
+    // Prepare output in JSON format
+    response = genEven.next();
+    console.log(response);
+    res.end(JSON.stringify(response));
+})
 
 app.get('/initRange', function (req, res) {
     // initialize each sequencer which has args with new args
@@ -93,7 +122,30 @@ app.get('/initRange', function (req, res) {
 })
 
 
+
 app.get('/initPartialSum', function (req, res) {
+    // initialize each sequencer which has args with new args
+    try{
+
+        var args_int = req.query.args.split(',').map(function(item) {
+            return parseInt(item, 10);
+        });
+        partial = sequencers.partialSumSeq.apply(this,args_int); // rangeSeq(1, 2) -> 1, 3, 5, 7, ...
+        response = {
+            args:req.query.args, success:true
+        };
+
+    }catch(err){
+        response = {
+            error:err.message, success:false
+        };
+    }
+
+    console.log(response);
+    res.end(JSON.stringify(response));
+})
+
+app.get('/initPipedSeq', function (req, res) {
     // initialize each sequencer which has args with new args
     try{
 
