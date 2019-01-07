@@ -1,4 +1,5 @@
 var express = require('express');
+const sequencers = require("./sequencers");
 var app = express();
 
 
@@ -7,9 +8,11 @@ app.get('/', function (req, res) {
    res.sendFile( __dirname + "/" + "index.html" );
 })
 
+let fact = sequencers.factorialSeq();
 app.get('/nextFactorial', function (req, res) {
+
    // Prepare output in JSON format
-   nextNum=factorialSeq();
+   nextNum=fact();
    response = {
       next:nextNum
    };
@@ -17,9 +20,10 @@ app.get('/nextFactorial', function (req, res) {
    res.end(JSON.stringify(response));
 })
 
+let fib = sequencers.fibonacciSeq();
 app.get('/nextFibonacci', function (req, res) {
    // Prepare output in JSON format
-   nextFibonacci=fibonacciSeq();
+   nextFibonacci=fib();
    response = {
       next:nextFibonacci
    };
@@ -27,9 +31,24 @@ app.get('/nextFibonacci', function (req, res) {
    res.end(JSON.stringify(response));
 })
 
+
+let prime = sequencers.primeSeq(); //  2, 3, 5, 7, 11, 13, ...
+app.get('/nextPrime', function (req, res) {
+    // Prepare output in JSON format
+    nextPrime=prime();
+    response = {
+        next:nextPrime
+    };
+    console.log(response);
+    res.end(JSON.stringify(response));
+})
+
+
+let range = sequencers.rangeSeq(2,3); // rangeSeq(1, 2) -> 1, 3, 5, 7, ...
+// TODO customize range params based on user input
 app.get('/nextRange', function (req, res) {
    // Prepare output in JSON format
-   nextRange=rangeSeq(1,2);
+   nextRange=range();
    response = {
       next:nextRange
    };
@@ -37,21 +56,14 @@ app.get('/nextRange', function (req, res) {
    res.end(JSON.stringify(response));
 })
 
-app.get('/nextPrime', function (req, res) {
-   // Prepare output in JSON format
-   nextPrime=primeSeq();
-   response = {
-      next:nextPrime
-   };
-   console.log(response);
-   res.end(JSON.stringify(response));
-})
 
-app.get('/nextPrimalSum', function (req, res) {
+let partial = sequencers.partialSumSeq(1, 3, 7, 2, 0); //partialSumSeq (1, 3, 7, 2, 0) {...} // 1, 4, 11, 13, 13, end
+// TODO customize partial sum params based on user input
+app.get('/nextPartialSum', function (req, res) {
    // Prepare output in JSON format
-   nextPrimalSum=partialSumSeq();
+    nextPartialSum=partial();
    response = {
-      next:nextPrimalSum
+      next:nextPartialSum
    };
    console.log(response);
    res.end(JSON.stringify(response));

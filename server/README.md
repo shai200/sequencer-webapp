@@ -1,5 +1,13 @@
-DEV NOTES
+TO TEST THE BACKEND:
 
+cd to server directory
+
+npm install
+
+npm test
+
+
+TO RUN:
 
 ARCHITECTURE
 

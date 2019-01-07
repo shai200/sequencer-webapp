@@ -1,0 +1,21 @@
+{
+  "name": "sequencer-webapp-master",
+  "version": "1.0.0",
+  "description": "DEV NOTES",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "express": "^4.16.4",
+    "mocha": "^5.2.0",
+    "request": "^2.88.0"
+  }
+}
